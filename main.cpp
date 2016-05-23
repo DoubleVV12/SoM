@@ -4,8 +4,8 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "SFML works!", sf::Style::Fullscreen);
-//    sf::RenderWindow window(sf::VideoMode(704,480), "SFML works!", sf::Style::Close);
+//    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "SFML works!", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(704,480), "SFML works!", sf::Style::Close);
 //    sf::RenderWindow window(sf::VideoMode(1680,1050), "SFML works!", sf::Style::Close);
 
     Game game;
