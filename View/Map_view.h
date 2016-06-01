@@ -9,11 +9,12 @@
 #include <c++/string>
 #include "../Model/Map.h"
 #include "Hitbox_view.h"
+#include "Layer_component.h"
 
-class Map_view : public sf::Drawable, public sf::Transformable {
+class Map_view : public Layer_component {
 public:
     Map_view(Map*);
-    virtual ~Map_view();
+    ~Map_view();
 
 private:
     bool load(const std::string &tileset, sf::Vector2u tileSize, unsigned int width,

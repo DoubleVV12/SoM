@@ -10,22 +10,23 @@
 #include "../Model/Character.h"
 #include "../Util/util.h"
 #include "Hitbox_view.h"
+#include "Layer_component.h"
 //#include "../Game.h"
 //class Game{};
 
-class Character_view : public sf::Drawable, public sf::Transformable
+class Character_view : public Layer_component
 {
 public:
     Character_view(Character *c);
     virtual ~Character_view();
-    void animate(move_set);
+    virtual void animate();
     void stop();
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    void set_max_animation(move_set);
+    void set_max_animation(Character::move_set);
 
-    move_set moveSet;
+    Character::move_set moveSet;
     sf::Texture texture;
     sf::Sprite sprite;
     Character *c;
@@ -35,6 +36,7 @@ private:
     unsigned short int frame;
     unsigned short int max_animation;
     Hitbox_view debug_hitbox;
+    sf::Vector2f previousPosition;
 };
 
 

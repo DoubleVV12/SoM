@@ -7,7 +7,7 @@
 #include "Map.h"
 #include "../Util/util.h"
 
-Map::Map() {
+Map::Map(bool hostile) {
     std::cout << "Map." << std::endl;
     width = 16;
     height = 8;
@@ -29,6 +29,8 @@ Map::Map() {
                 hitbox.push_back(new Hitbox(j*TILE_SIZE,i*TILE_SIZE,TILE_SIZE,TILE_SIZE));
         }
     }
+
+    isHostile = hostile;
 }
 
 Map::~Map() {
@@ -43,23 +45,15 @@ Map::Map(const Map &other) {
     level = other.level;
 }
 
-bool Map::verify_move(unsigned short int direction,Character *c) {
-    std::list<Hitbox*>::iterator i;
-    i = hitbox.begin();
-
-    while( i != hitbox.end())
-    {
-        if(c->verify_move(direction,*i))
-            return true;
-//        std::cout << i->get_position().x/TILE_SIZE << "  " << i->get_position().y/TILE_SIZE << std::endl;
-        i++;
-    }
-    return false;
-}
-
-std::list<Hitbox *> Map::get_hitbox() {
+std::list<Hitbox *> Map::getHitbox() {
     return hitbox;
 }
+
+bool Map::getHostile() {
+    return isHostile;
+}
+
+
 
 
 

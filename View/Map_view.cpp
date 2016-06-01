@@ -12,7 +12,7 @@ Map_view::Map_view(Map* m) {
     if (!load("./Texture/Map/tiles.png", sf::Vector2u(TILE_SIZE, TILE_SIZE), 16, 8))
         std::cout << "Failed to load player spritesheet!" << std::endl;
 
-    for(Hitbox* h : map->get_hitbox()){
+    for(Hitbox* h : map->getHitbox()){
         debug.push_back(Hitbox_view(h));
     }
 }

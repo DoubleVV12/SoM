@@ -6,15 +6,16 @@
 #define SFMLTEST_LAYER_COMPONENT_H
 
 #include <SFML/Graphics.hpp>
-#include "../Game.h"
 
 class Layer_component : public sf::Drawable, public sf::Transformable {
+public:
+    virtual void animate();
+
 protected:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     sf::Texture texture;
     sf::VertexArray vertices;
-    Game *game;
 };
 
 

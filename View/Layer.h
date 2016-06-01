@@ -6,19 +6,23 @@
 #define SFMLTEST_LAYER_H
 
 #include <SFML/Graphics.hpp>
+#include <c++/list>
 #include "Layer_component.h"
 
 
 class Layer : public sf::Drawable {
 public:
-    Layer();
-    virtual ~Layer();
-    void add(Layer_component);
+//    Layer();
+//    ~Layer();
+    void add(Layer_component*);
+    void animate();
+    void sort();
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-    Layer_component* component;
-    int nb_component;
+    std::list<Layer_component*> component;
+
+    void erase();
 };
 
 

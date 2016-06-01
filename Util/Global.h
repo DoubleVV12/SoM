@@ -7,6 +7,7 @@
 #define CAMERA_SENSITIVITY 0.35f
 #define CHARA_SPRITE_W 30
 #define CHARA_SPRITE_H 40
+#define PUSH_FACTOR 0.5f
 
 #include <SFML/Graphics.hpp>
 

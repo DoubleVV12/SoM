@@ -2,42 +2,30 @@
 // Created by DoubleVV on 26/04/2016.
 //
 
+#include <c++/iostream>
 #include "Layer.h"
 
 void Layer::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    {
-        for(int i=0; i<nb_component; i++){
-            target.draw(component[i]);
-        }
+    for(Layer_component *comp : component){
+        target.draw(*comp);
     }
 }
 
-void Layer::add(Layer_component new_component) {
-    nb_component++;
+void Layer::add(Layer_component *new_component) {
+    component.push_back(new_component);
+}
 
-    Layer_component tmp[nb_component];
-    component = new Layer_component[nb_component];
+void Layer::erase() {
+    component.pop_back();
+}
 
-    for(int i=0; i<nb_component-1; i++)
-    {
-        tmp[i] = component[i];
+void Layer::animate() {
+    for(Layer_component *comp : component){
+        comp->animate();
     }
-
-    tmp[nb_component-1] = new_component;
-
-    *component = *tmp;
 }
 
-Layer::Layer() {
-    nb_component = 0;
-    component = new Layer_component[nb_component];
+void Layer::sort() {
+    component.sort([](Layer_component* first, Layer_component* second){
+        return first->getPosition().y < second->getPosition().y;});
 }
-
-Layer::~Layer(){
-//    delete[] component;
-}
-
-
-
-
-

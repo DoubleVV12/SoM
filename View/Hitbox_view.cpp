@@ -7,10 +7,11 @@
 
 Hitbox_view::Hitbox_view(Hitbox* h) {
     hitbox = h;
-    line[0] = sf::Vertex(hitbox->get_position());
-    line[1] = sf::Vertex(sf::Vector2f(hitbox->get_position().x+hitbox->get_size().x,hitbox->get_position().y));
-    line[2] = sf::Vertex(sf::Vector2f(hitbox->get_position().x+hitbox->get_size().x,hitbox->get_position().y+hitbox->get_size().y));
-    line[3] = sf::Vertex(sf::Vector2f(hitbox->get_position().x,hitbox->get_position().y+hitbox->get_size().y));
+    line[0] = sf::Vertex(hitbox->getPosition());
+    line[1] = sf::Vertex(sf::Vector2f(hitbox->getPosition().x+hitbox->get_size().x, hitbox->getPosition().y));
+    line[2] = sf::Vertex(sf::Vector2f(hitbox->getPosition().x+hitbox->get_size().x,
+                                      hitbox->getPosition().y+hitbox->get_size().y));
+    line[3] = sf::Vertex(sf::Vector2f(hitbox->getPosition().x, hitbox->getPosition().y+hitbox->get_size().y));
     line[4] = line[0];
 }
 
@@ -24,10 +25,11 @@ Hitbox_view::Hitbox_view() {
 }
 
 void Hitbox_view::update() {
-    line[0] = sf::Vertex(hitbox->get_position());
-    line[1] = sf::Vertex(sf::Vector2f(hitbox->get_position().x+hitbox->get_size().x,hitbox->get_position().y));
-    line[2] = sf::Vertex(sf::Vector2f(hitbox->get_position().x+hitbox->get_size().x,hitbox->get_position().y+hitbox->get_size().y));
-    line[3] = sf::Vertex(sf::Vector2f(hitbox->get_position().x,hitbox->get_position().y+hitbox->get_size().y));
+    line[0] = sf::Vertex(hitbox->getPosition());
+    line[1] = sf::Vertex(sf::Vector2f(hitbox->getPosition().x+hitbox->get_size().x, hitbox->getPosition().y));
+    line[2] = sf::Vertex(sf::Vector2f(hitbox->getPosition().x+hitbox->get_size().x,
+                                      hitbox->getPosition().y+hitbox->get_size().y));
+    line[3] = sf::Vertex(sf::Vector2f(hitbox->getPosition().x, hitbox->getPosition().y+hitbox->get_size().y));
     line[4] = line[0];
 }
 

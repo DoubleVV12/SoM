@@ -30,7 +30,7 @@ endif()
 
 # Define sources and executable
 set(EXECUTABLE_NAME ${PROJECT_NAME})
-set(SOURCE_FILES main.cpp Model/Character.cpp Model/Character.h View/Character_view.cpp View/Character_view.h Game.cpp Game.h Model/Map.cpp Model/Map.h View/Map_view.cpp View/Map_view.h View/Layer.cpp View/Layer.h View/Layer_component.cpp View/Layer_component.h Util/util.h Util/Global.h Model/Hitbox.cpp Model/Hitbox.h View/Hitbox_view.cpp View/Hitbox_view.h)
+set(SOURCE_FILES main.cpp Model/Character.cpp Model/Character.h View/Character_view.cpp View/Character_view.h Model/Game.cpp Model/Game.h Model/Map.cpp Model/Map.h View/Map_view.cpp View/Map_view.h View/Layer.cpp View/Layer.h View/Layer_component.cpp View/Layer_component.h Util/util.h Util/Global.h Model/Hitbox.cpp Model/Hitbox.h View/Hitbox_view.cpp View/Hitbox_view.h View/Game_view.cpp View/Game_view.h Model/Player.cpp Model/Player.h Model/Npc.cpp Model/Npc.h Model/Monster.cpp Model/Monster.h Model/PlayableChar.cpp Model/PlayableChar.h Model/Dialog.cpp Model/Dialog.h)
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
 
 # Detect and add SFML

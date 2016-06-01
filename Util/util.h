@@ -7,8 +7,6 @@
 
 #include "Global.h"
 
-enum move_set{WALK_DOWN,WALK_LEFT,WALK_UP,WALK_RIGHT};
-
 static void start_clock(){ //TODO : savoir si ça sert vraiment
     game_clock.restart();
 }

@@ -6,31 +6,53 @@
 #define SFMLTEST_CHARACTER_H
 
 #include <SFML/Graphics.hpp>
+#include <c++/iostream>
+
 #include "Hitbox.h"
+#include "Map.h"
+#include "../Util/util.h"
+
 
 #define WALKING_SPEED 100
 
+
+//TODO Réécriture de la classe et la décomposer en 3 classes
 class Character
 {
 private:
     sf::Vector2f position;
     float speed;
     Hitbox hitbox;
+    std::string name;
 
 public:
-    Character();
-    Character(int xpos, int ypos);
-    Character(sf::Vector2f pos);
-    ~Character();
+    enum direction{LEFT,UP,RIGHT,DOWN};
+    enum move_set{WALK_DOWN,WALK_LEFT,WALK_UP,WALK_RIGHT};
+
+    //Constructor, copy constructor and destructor
+    Character(int xpos, int ypos, std::string name = "Character");
     Character(const Character& other);
+    virtual ~Character();
+
+    //Getter and setter
     sf::Vector2f getPosition();
-    Hitbox* get_hitbox();
-    void setPosition(sf::Vector2f);
-    void setPosition(int,int);
-    void move(unsigned short int, float factor = 1);
+    void setPosition(float,float);
+
+    Hitbox* getHitbox();
+
+    float getSpeed();
+    void setSpeed(float s);
+
+    std::string getName();
+    void setName(std::string s);
+
+    //Other functions
+    virtual bool move(direction d, Map* m, std::list<Character*>* npc, std::list<Character*>* playableChar, float factor = 1) = 0;
     void stop();
-    void calcul_hitbox();
-    bool verify_move(unsigned short int,Hitbox*);
+    virtual void calculHitbox(direction d);
+    bool verifyMove(direction d, Hitbox *h);
+    bool verifyMoveMap(direction d, std::list<Hitbox *> hb);
+
 };
 
 

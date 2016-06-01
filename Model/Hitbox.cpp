@@ -20,7 +20,7 @@ Hitbox::Hitbox(sf::Vector2f pos, int xsize, int ysize) {
     size = sf::Vector2i(xsize,ysize);
 }
 
-sf::Vector2f Hitbox::get_position() {
+sf::Vector2f Hitbox::getPosition() {
     return position;
 }
 
@@ -28,8 +28,9 @@ sf::Vector2i Hitbox::get_size() {
     return size;
 }
 
-void Hitbox::set_position(sf::Vector2f p) {
-    position = p;
+void Hitbox::setPosition(float xpos, float ypos) {
+    position.x = xpos;
+    position.y = ypos;
 }
 
 void Hitbox::set_size(sf::Vector2i s) {
@@ -52,6 +53,36 @@ bool Hitbox::collision(Hitbox h) {
         || (h.position.y >= this->position.y + this->size.y) // trop en bas
         || (h.position.y + h.size.y <= this->position.y));
 }
+
+void Hitbox::scale(float v) {
+    sf::Vector2f center = sf::Vector2f(position.x+(size.x/2),position.y+(size.y/2));
+    position.x -= (size.x/2)*(v-1);
+    position.y -= (size.y/2)*(v-1);
+    size.x *= v;
+    size.y *= v;
+}
+
+void Hitbox::move(unsigned short int d, float speed) {
+    switch (d){
+        case DOWN :
+            setPosition(getPosition().x,getPosition().y+speed);
+            break;
+        case LEFT :
+            setPosition(getPosition().x-speed,getPosition().y);
+            break;
+        case UP :
+            setPosition(getPosition().x,getPosition().y-speed);
+            break;
+        case RIGHT :
+            setPosition(getPosition().x+speed,getPosition().y);
+            break;
+        default:break;
+    }
+}
+
+
+
+
 
 
 

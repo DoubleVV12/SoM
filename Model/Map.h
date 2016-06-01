@@ -7,23 +7,25 @@
 
 #include <c++/list>
 #include "Hitbox.h"
-#include "Character.h"
 
 class Map
 {
 public:
-    Map();
+    Map(bool hostile);
     ~Map();
     Map(const Map& other);
+
+    ///Getters and Setters
     int* getLevel();
-    bool verify_move(unsigned short int,Character *c);
-    std::list<Hitbox*> get_hitbox();
+    std::list<Hitbox*> getHitbox();
+    bool getHostile();
 
 private:
     int height;
     int width;
     int* level;
     std::list<Hitbox*> hitbox;
+    bool isHostile;
 };
 
 

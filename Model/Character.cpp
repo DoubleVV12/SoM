@@ -1,109 +1,102 @@
 // Created by DoubleVV on 26/04/2016.
 //
 
-#define GLOBAL
-#include <c++/iostream>
-#include "Character.h"
-#include "../Util/util.h"
 
-Character::Character()
-{
+#include "Character.h"
+
+Character::Character(int xpos, int ypos, std::string name) {
     std::cout << "Character." << std::endl;
-    setPosition(50,50);
+    this->name = name;
+    position = sf::Vector2f(xpos,ypos);
     speed = 0;
-    hitbox = Hitbox(position.x+3,position.y+(CHARA_SPRITE_H/2), CHARA_SPRITE_W-9,CHARA_SPRITE_H/2-4);
+    hitbox = Hitbox(position.x+6,position.y+(CHARA_SPRITE_H/2), CHARA_SPRITE_W-14,CHARA_SPRITE_H/2-6);
 }
 
-Character::Character(const Character &other)
-{
+Character::Character(const Character &other){
+    std::cout << "Character." << std::endl;
     position = other.position;
     speed=other.speed;
     hitbox = other.hitbox;
 }
 
-sf::Vector2f Character::getPosition()
-{
+Character::~Character() {
+    std::cout << "~Character." << std::endl;
+}
+
+sf::Vector2f Character::getPosition() {
     return position;
 }
 
-void Character::setPosition(sf::Vector2f newPosition)
-{
-    position = newPosition;
-}
-
-void Character::setPosition(int x, int y)
-{
+void Character::setPosition(float x, float y) {
     position.x = x;
     position.y = y;
-}
-
-Character::~Character() {
-
-}
-
-//Down = 0, Left = 1, Up = 2, Right = 3
-void Character::move(unsigned short int direction,float factor) {
-    speed = (float)(WALKING_SPEED*dt.asSeconds())*factor;
-//            std::cout<< (float)dt.asSeconds() << std::endl;
-    switch (direction){
-        case 0 :
-            position.y += speed;
-            break;
-        case 1 :
-            position.x -= speed;
-            break;
-        case 2 :
-            position.y -= speed;
-//        std::cout<< position.x << " " << position.y << std::endl;
-            break;
-        case 3 :
-            position.x += speed;
-            break;
-    }
-    calcul_hitbox();
 }
 
 void Character::stop() {
     speed = 0;
 }
 
-Character::Character(int xpos, int ypos) {
-    position = sf::Vector2f(xpos,ypos);
-    hitbox = Hitbox(position.x+4,position.y+(CHARA_SPRITE_H/2), CHARA_SPRITE_W-9,CHARA_SPRITE_H/2-4);
-}
-
-Character::Character(sf::Vector2f pos) {
-    position = pos;
-    hitbox = Hitbox(position.x+4,position.y+(CHARA_SPRITE_H/2), CHARA_SPRITE_W-9,CHARA_SPRITE_H/2-4);
-}
-
-Hitbox* Character::get_hitbox() {
+Hitbox* Character::getHitbox() {
     return &hitbox;
 }
 
-void Character::calcul_hitbox() {
-    hitbox.set_position(sf::Vector2f(position.x+4,position.y+(CHARA_SPRITE_H/2)));
+void Character::calculHitbox(direction d) {
+    hitbox.move(d,speed);
 }
 
-bool Character::verify_move(unsigned short int direction, Hitbox* h) {
+bool Character::verifyMove(direction d, Hitbox *h) {
     Hitbox next_move;
     float next_speed = (WALKING_SPEED*dt.asSeconds());
-    switch (direction){
-        case 0 :
-            next_move = Hitbox(hitbox.get_position().x,hitbox.get_position().y+next_speed,hitbox.get_size());
+    switch (d){
+        case DOWN :
+            next_move = Hitbox(hitbox.getPosition().x, hitbox.getPosition().y+next_speed,hitbox.get_size());
             return h->collision(next_move);
-        case 1 :
-            next_move = Hitbox(hitbox.get_position().x-next_speed,hitbox.get_position().y,hitbox.get_size());
+        case LEFT :
+            next_move = Hitbox(hitbox.getPosition().x-next_speed, hitbox.getPosition().y,hitbox.get_size());
             return h->collision(next_move);
-        case 2 :
-            next_move = Hitbox(hitbox.get_position().x,hitbox.get_position().y-next_speed,hitbox.get_size());
+        case UP :
+            next_move = Hitbox(hitbox.getPosition().x, hitbox.getPosition().y-next_speed,hitbox.get_size());
             return h->collision(next_move);
-        case 3 :
-            next_move = Hitbox(hitbox.get_position().x+next_speed,hitbox.get_position().y,hitbox.get_size());
+        case RIGHT :
+            next_move = Hitbox(hitbox.getPosition().x+next_speed, hitbox.getPosition().y,hitbox.get_size());
             return h->collision(next_move);
     }
     return false;
 }
+
+float Character::getSpeed() {
+    return speed;
+}
+
+bool Character::verifyMoveMap(direction d, std::list<Hitbox *> hb) {
+    for(Hitbox* h : hb){
+        if (verifyMove(d, h))
+            return true;
+    }
+    return false;
+}
+
+void Character::setSpeed(float s) {
+    speed = s;
+}
+
+std::string Character::getName() {
+    return name;
+}
+
+void Character::setName(std::string s) {
+    name = s;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

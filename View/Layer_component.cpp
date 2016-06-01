@@ -18,3 +18,9 @@ void Layer_component::draw(sf::RenderTarget &target, sf::RenderStates states) co
     target.draw(vertices, states);
 }
 
+void Layer_component::animate() {
+
+}
+
+
+
